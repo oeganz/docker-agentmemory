@@ -2,7 +2,6 @@ workers:
   - name: iii-http
     config:
       port: 3111
-      host: 0.0.0.0
       default_timeout: 180000
       cors:
         allowed_origins: ["*"]
