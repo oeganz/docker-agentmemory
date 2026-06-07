@@ -1,6 +1,6 @@
-FROM node:22-alpine
+FROM node:22-slim
 
-RUN apk add --no-cache curl ca-certificates
+RUN apt-get update && apt-get install -y curl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Install agentmemory npm package
 RUN npm install -g @agentmemory/agentmemory
