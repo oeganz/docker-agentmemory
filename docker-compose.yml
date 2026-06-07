@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  agentmemory:
+    image: ghcr.io/rohitg00/agentmemory:latest
+    container_name: agentmemory
+    restart: always
+    ports:
+      - "3111:3111"
+      - "3112:3112"
+    environment:
+      - AUTH_TOKEN=${AUTH_TOKEN}
+      - NODE_ENV=production
+    volumes:
+      - agentmemory_data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3111/agentmemory/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  agentmemory_data:
+    driver: local
